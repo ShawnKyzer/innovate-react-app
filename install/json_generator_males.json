@@ -1,0 +1,28 @@
+[
+  {
+    'repeat:50': {
+      index: '{{index()+1}}',
+      isActive: 'true',
+      picture: function (tags){return 'http://api.randomuser.me/portraits/med/men/'+this.index+'.jpg';},
+      name: {
+        first: '{{firstName(["male"])}}',
+        last: '{{surname()}}'
+      },
+      username:function (tags) { return(this.name.first.substring(0, 1) + this.name.last);},
+      company: 'inovate',
+      email: function (tags) {
+        return (this.name.first + '.' + this.name.last + '@' + this.company + '.org');
+      },
+      phone: '+1 {{phone()}}',
+      registered: '{{moment(this.date(new Date(2014, 0, 1), new Date())).format("LLLL")}}',
+      favoriteFruit: function (tags) {
+        var fruits = ['apple', 'banana', 'strawberry'];
+        return fruits[tags.integer(0, fruits.length - 1)];
+      },
+            department: function (tags) {
+        var department = ['Special Ops', 'Covert Ops', 'R&D','HR','Daycare Center'];
+        return department[tags.integer(0, department.length - 1)];
+      }
+    }
+  }
+]
